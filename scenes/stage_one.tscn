@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://caqlyy56jxb42"]
+[gd_scene load_steps=6 format=3 uid="uid://caqlyy56jxb42"]
 
 [ext_resource type="PackedScene" uid="uid://cx2w4a805kn8v" path="res://scenes/Player/player_character.tscn" id="1_cq7rf"]
 [ext_resource type="Script" uid="uid://dsdrdhussl3b8" path="res://scripts/main_camera.gd" id="2_1vyjf"]
 [ext_resource type="Texture2D" uid="uid://bw7iuj3taoidf" path="res://icon.svg" id="2_b0ocx"]
+[ext_resource type="PackedScene" uid="uid://ts57erduk6u1" path="res://scenes/Misc/GameManager/game_manager.tscn" id="3_uk7ly"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vyjf"]
 size = Vector2(128, 121.905)
@@ -13,9 +14,12 @@ size = Vector2(128, 121.905)
 position = Vector2(30, 30)
 
 [node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+limit_left = 0
+limit_top = 0
 script = ExtResource("2_1vyjf")
 target = NodePath("../PlayerCharacter")
-smoothing = 1.0
+
+[node name="GameManager" parent="." instance=ExtResource("3_uk7ly")]
 
 [node name="Placeholders" type="Node2D" parent="."]
 position = Vector2(30, 30)

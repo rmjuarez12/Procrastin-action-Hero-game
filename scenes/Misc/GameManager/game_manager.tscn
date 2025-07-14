@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://ts57erduk6u1"]
+
+[ext_resource type="Script" uid="uid://c4cep3gjwysdq" path="res://scenes/Misc/GameManager/scripts/game_manager.gd" id="1_0uon3"]
+[ext_resource type="FontFile" uid="uid://c6juvcku4b4xx" path="res://assets/m5x7.ttf" id="2_2wmy1"]
+[ext_resource type="Texture2D" uid="uid://b1f600a8tqbfn" path="res://scenes/Misc/GameManager/assets/healthbarUnder.png" id="2_encro"]
+[ext_resource type="Script" uid="uid://dyvw1qlq3hsro" path="res://scenes/Misc/GameManager/scripts/motivation_bar.gd" id="3_encro"]
+[ext_resource type="Texture2D" uid="uid://dtnorpac6mpaf" path="res://scenes/Misc/GameManager/assets/healthbarProgress.png" id="3_wlm32"]
+
+[sub_resource type="Theme" id="Theme_wlm32"]
+default_font = ExtResource("2_2wmy1")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wlm32"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_0uon3")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="MotivationBar" type="Panel" parent="HUD"]
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 144.0
+offset_bottom = 48.0
+size_flags_horizontal = 0
+theme = SubResource("Theme_wlm32")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wlm32")
+script = ExtResource("3_encro")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="HUD/MotivationBar"]
+layout_mode = 1
+offset_right = 64.0
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+value = 100.0
+texture_under = ExtResource("2_encro")
+texture_progress = ExtResource("3_wlm32")
+tint_under = Color(0.767843, 0.429038, 1, 1)
+tint_progress = Color(0.480265, 0.00257923, 0.793628, 1)
+
+[node name="ValueLabel" type="Label" parent="HUD/MotivationBar"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -15.5
+offset_top = 4.0
+offset_right = 15.5
+offset_bottom = 16.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 12
+text = "100/100"
+
+[node name="DecreaseTimer" type="Timer" parent="HUD/MotivationBar"]
+
+[node name="Label" type="Label" parent="HUD/MotivationBar"]
+layout_mode = 1
+offset_top = 20.0
+offset_right = 54.0
+offset_bottom = 33.0
+theme_override_font_sizes/font_size = 12
+text = "Motivation"
+
+[connection signal="timeout" from="HUD/MotivationBar/DecreaseTimer" to="HUD/MotivationBar" method="_on_decrease_timer_timeout"]
