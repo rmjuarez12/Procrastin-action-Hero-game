@@ -12,8 +12,9 @@ default_font = ExtResource("2_2wmy1")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wlm32"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="GameManager" type="Node"]
+[node name="GameManager" type="Node" node_paths=PackedStringArray("motivation_bar")]
 script = ExtResource("1_0uon3")
+motivation_bar = NodePath("HUD/MotivationBar")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -54,13 +55,5 @@ theme_override_font_sizes/font_size = 12
 text = "100/100"
 
 [node name="DecreaseTimer" type="Timer" parent="HUD/MotivationBar"]
-
-[node name="Label" type="Label" parent="HUD/MotivationBar"]
-layout_mode = 1
-offset_top = 20.0
-offset_right = 54.0
-offset_bottom = 33.0
-theme_override_font_sizes/font_size = 12
-text = "Motivation"
 
 [connection signal="timeout" from="HUD/MotivationBar/DecreaseTimer" to="HUD/MotivationBar" method="_on_decrease_timer_timeout"]

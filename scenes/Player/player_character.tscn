@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cx2w4a805kn8v"]
+[gd_scene load_steps=6 format=3 uid="uid://cx2w4a805kn8v"]
 
 [ext_resource type="Texture2D" uid="uid://bw7iuj3taoidf" path="res://icon.svg" id="1_ib77y"]
 [ext_resource type="Script" uid="uid://biort7cvh06k5" path="res://scenes/Player/scripts/player_character.gd" id="1_soqk2"]
 [ext_resource type="Script" uid="uid://btxl83k8g3a0o" path="res://scenes/Player/scripts/state_machine.gd" id="3_uxe4s"]
+[ext_resource type="AudioStream" uid="uid://b7ygefenn8hf4" path="res://scenes/Player/assets/change_mode.wav" id="4_r4pcq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uxe4s"]
 
@@ -19,3 +20,6 @@ shape = SubResource("CapsuleShape2D_uxe4s")
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_uxe4s")
+
+[node name="SfxChangeMode" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_r4pcq")

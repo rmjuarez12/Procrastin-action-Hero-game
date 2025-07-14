@@ -1,17 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://caqlyy56jxb42"]
+[gd_scene load_steps=8 format=3 uid="uid://caqlyy56jxb42"]
 
 [ext_resource type="PackedScene" uid="uid://cx2w4a805kn8v" path="res://scenes/Player/player_character.tscn" id="1_cq7rf"]
 [ext_resource type="Script" uid="uid://dsdrdhussl3b8" path="res://scripts/main_camera.gd" id="2_1vyjf"]
 [ext_resource type="Texture2D" uid="uid://bw7iuj3taoidf" path="res://icon.svg" id="2_b0ocx"]
 [ext_resource type="PackedScene" uid="uid://ts57erduk6u1" path="res://scenes/Misc/GameManager/game_manager.tscn" id="3_uk7ly"]
+[ext_resource type="PackedScene" uid="uid://c8bxs8fhbrwli" path="res://scenes/Items/MotivationBooster/motivation_booster.tscn" id="5_ctoh7"]
+[ext_resource type="AudioStream" uid="uid://cri4eu47003rb" path="res://assets/exploration.ogg" id="7_okbnv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vyjf"]
 size = Vector2(128, 121.905)
 
 [node name="Stage" type="Node2D"]
 
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="BgDark" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_cq7rf")]
-position = Vector2(30, 30)
+position = Vector2(33, 99)
 
 [node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 limit_left = 0
@@ -35,3 +42,16 @@ texture = ExtResource("2_b0ocx")
 position = Vector2(193, 108)
 scale = Vector2(3.46875, 0.164063)
 shape = SubResource("RectangleShape2D_1vyjf")
+
+[node name="Items" type="Node" parent="."]
+
+[node name="MotivationBooster" parent="Items" instance=ExtResource("5_ctoh7")]
+position = Vector2(142, 98)
+
+[node name="MotivationBooster2" parent="Items" instance=ExtResource("5_ctoh7")]
+position = Vector2(326, 96)
+booster_type = "energy_drink"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_okbnv")
+autoplay = true
