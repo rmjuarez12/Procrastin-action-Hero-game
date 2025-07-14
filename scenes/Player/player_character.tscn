@@ -7,8 +7,9 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uxe4s"]
 
-[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("state_machine")]
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("change_mode_sfx", "state_machine")]
 script = ExtResource("1_soqk2")
+change_mode_sfx = NodePath("SfxChangeMode")
 state_machine = NodePath("StateMachine")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

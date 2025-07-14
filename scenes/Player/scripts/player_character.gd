@@ -1,14 +1,18 @@
 extends CharacterBody2D
 
 # Walking vars
-@export var walk_speed = 300.0
-@export var run_speed = 600.0
+@export var walk_speed = 150.0
+@export var run_speed = 250.0
 @export_range(0,1) var deceleration = 0.1
 @export_range(0,1) var acceleartion = 0.08
 
-@export var state_machine: Node
+# Jumping vars
+@export var jump_speed = -250.0
+@export var high_jump_speed = -350.0
 
-const JUMP_VELOCITY = -400.0
+@export var change_mode_sfx: AudioStreamPlayer
+
+@export var state_machine: Node
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -17,7 +21,12 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		var jump_velocity = jump_speed
+
+		if GlobalState.production_mode:
+			jump_velocity = high_jump_speed
+
+		velocity.y = jump_velocity
 
 	_toggle_production_mode()
 	_handle_char_movement()
@@ -27,6 +36,7 @@ func _physics_process(delta: float) -> void:
 # Handle when switching to "productive" mode
 func _toggle_production_mode():
 	if Input.is_action_just_pressed("change_mode"):
+		change_mode_sfx.play()
 		GlobalState.toggle_production_mode()
 
 # Handle main character movement on ground

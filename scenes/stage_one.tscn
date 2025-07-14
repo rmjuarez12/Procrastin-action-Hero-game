@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://caqlyy56jxb42"]
+[gd_scene load_steps=11 format=3 uid="uid://caqlyy56jxb42"]
 
 [ext_resource type="PackedScene" uid="uid://cx2w4a805kn8v" path="res://scenes/Player/player_character.tscn" id="1_cq7rf"]
 [ext_resource type="Script" uid="uid://dsdrdhussl3b8" path="res://scripts/main_camera.gd" id="2_1vyjf"]
@@ -6,6 +6,44 @@
 [ext_resource type="PackedScene" uid="uid://ts57erduk6u1" path="res://scenes/Misc/GameManager/game_manager.tscn" id="3_uk7ly"]
 [ext_resource type="PackedScene" uid="uid://c8bxs8fhbrwli" path="res://scenes/Items/MotivationBooster/motivation_booster.tscn" id="5_ctoh7"]
 [ext_resource type="AudioStream" uid="uid://cri4eu47003rb" path="res://assets/exploration.ogg" id="7_okbnv"]
+
+[sub_resource type="Animation" id="Animation_sbgwt"]
+resource_name = "small_shake"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 2), Vector2(0, -2), Vector2(0, 1), Vector2(0, -1)]
+}
+
+[sub_resource type="Animation" id="Animation_okbnv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ob5a"]
+_data = {
+&"RESET": SubResource("Animation_okbnv"),
+&"small_shake": SubResource("Animation_sbgwt")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1vyjf"]
 size = Vector2(128, 121.905)
@@ -18,13 +56,18 @@ size = Vector2(128, 121.905)
 motion_scale = Vector2(0, 0)
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_cq7rf")]
-position = Vector2(33, 99)
+position = Vector2(33, 273)
 
 [node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 limit_left = 0
 limit_top = 0
 script = ExtResource("2_1vyjf")
 target = NodePath("../PlayerCharacter")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainCamera"]
+libraries = {
+&"": SubResource("AnimationLibrary_8ob5a")
+}
 
 [node name="GameManager" parent="." instance=ExtResource("3_uk7ly")]
 
@@ -34,22 +77,22 @@ position = Vector2(30, 30)
 [node name="StaticBody2D" type="StaticBody2D" parent="Placeholders"]
 
 [node name="Platform" type="Sprite2D" parent="Placeholders/StaticBody2D"]
-position = Vector2(193, 108.5)
+position = Vector2(193, 282.5)
 scale = Vector2(3.46875, 0.164063)
 texture = ExtResource("2_b0ocx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Placeholders/StaticBody2D"]
-position = Vector2(193, 108)
+position = Vector2(193, 282)
 scale = Vector2(3.46875, 0.164063)
 shape = SubResource("RectangleShape2D_1vyjf")
 
 [node name="Items" type="Node" parent="."]
 
 [node name="MotivationBooster" parent="Items" instance=ExtResource("5_ctoh7")]
-position = Vector2(142, 98)
+position = Vector2(142, 272)
 
 [node name="MotivationBooster2" parent="Items" instance=ExtResource("5_ctoh7")]
-position = Vector2(326, 96)
+position = Vector2(326, 270)
 booster_type = "energy_drink"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

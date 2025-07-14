@@ -38,7 +38,7 @@ size_flags_vertical = 0
 value = 100.0
 texture_under = ExtResource("2_encro")
 texture_progress = ExtResource("3_wlm32")
-tint_under = Color(0.767843, 0.429038, 1, 1)
+tint_under = Color(0.768627, 0.427451, 1, 1)
 tint_progress = Color(0.480265, 0.00257923, 0.793628, 1)
 
 [node name="ValueLabel" type="Label" parent="HUD/MotivationBar"]
