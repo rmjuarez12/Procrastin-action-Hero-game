@@ -7,6 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://c8bxs8fhbrwli" path="res://scenes/Items/MotivationBooster/motivation_booster.tscn" id="5_ctoh7"]
 [ext_resource type="AudioStream" uid="uid://cri4eu47003rb" path="res://assets/exploration.ogg" id="7_okbnv"]
 
+[sub_resource type="Animation" id="Animation_okbnv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_sbgwt"]
 resource_name = "small_shake"
 length = 0.4
@@ -22,21 +37,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(0, 2), Vector2(0, -2), Vector2(0, 1), Vector2(0, -1)]
-}
-
-[sub_resource type="Animation" id="Animation_okbnv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8ob5a"]
@@ -56,11 +56,12 @@ size = Vector2(128, 121.905)
 motion_scale = Vector2(0, 0)
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_cq7rf")]
-position = Vector2(33, 273)
+position = Vector2(33, 125)
 
 [node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 limit_left = 0
 limit_top = 0
+limit_bottom = 360
 script = ExtResource("2_1vyjf")
 target = NodePath("../PlayerCharacter")
 
@@ -74,16 +75,29 @@ libraries = {
 [node name="Placeholders" type="Node2D" parent="."]
 position = Vector2(30, 30)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Placeholders"]
+[node name="Platform" type="StaticBody2D" parent="Placeholders"]
 
-[node name="Platform" type="Sprite2D" parent="Placeholders/StaticBody2D"]
+[node name="Platform" type="Sprite2D" parent="Placeholders/Platform"]
 position = Vector2(193, 282.5)
 scale = Vector2(3.46875, 0.164063)
 texture = ExtResource("2_b0ocx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Placeholders/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Placeholders/Platform"]
 position = Vector2(193, 282)
 scale = Vector2(3.46875, 0.164063)
+shape = SubResource("RectangleShape2D_1vyjf")
+
+[node name="Platform2" type="StaticBody2D" parent="Placeholders"]
+position = Vector2(-162, -118)
+
+[node name="Platform" type="Sprite2D" parent="Placeholders/Platform2"]
+position = Vector2(193, 282.5)
+scale = Vector2(0.94875, 0.164063)
+texture = ExtResource("2_b0ocx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Placeholders/Platform2"]
+position = Vector2(193, 282)
+scale = Vector2(0.98875, 0.164063)
 shape = SubResource("RectangleShape2D_1vyjf")
 
 [node name="Items" type="Node" parent="."]

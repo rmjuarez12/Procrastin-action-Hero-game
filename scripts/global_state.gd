@@ -1,6 +1,7 @@
 extends Node
 
 var production_mode: bool = false
+var momentum_high: bool = false
 var motivation_meter: int = 100
 
 signal production_mode_changed(is_active: bool)

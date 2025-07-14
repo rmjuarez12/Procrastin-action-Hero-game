@@ -175,6 +175,7 @@ _data = {
 }
 
 [node name="MotivationBooster" type="Area2D" node_paths=PackedStringArray("collect_sfx")]
+scale = Vector2(0.7, 0.7)
 script = ExtResource("1_nff07")
 booster_type = "coffee"
 collect_sfx = NodePath("SfxCollect")

@@ -1,11 +1,11 @@
 extends Node
 
-class_name CharacterState
+class_name PlayerState
 
 @export var can_move: bool = true
 
 var character : CharacterBody2D
-var next_state : CharacterState
+var next_state : PlayerState
 var playback : AnimationNodeStateMachinePlayback
 
 func state_process(_delta):
