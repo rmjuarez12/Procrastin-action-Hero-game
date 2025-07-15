@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1l4yqk5kyod1"]
+
+[ext_resource type="Script" uid="uid://cb8jandkjqj3l" path="res://scenes/Misc/FinishLine/finish_line.gd" id="1_2acex"]
+[ext_resource type="PackedScene" uid="uid://dcn1didwt1pd5" path="res://scenes/Misc/SceneTransition/scene_transition.tscn" id="2_sfot5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gxmyf"]
+
+[node name="FinishLine" type="Area2D"]
+script = ExtResource("1_2acex")
+transition_fade = ExtResource("2_sfot5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gxmyf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

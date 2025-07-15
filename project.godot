@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalState="*res://scripts/global_state.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+StageMusic="*res://scenes/Misc/StageMusic/StageMusic.tscn"
 
 [dialogue_manager]
 
