@@ -1,0 +1,9 @@
+~ start
+do GlobalState.freeze_game_time(true)
+Max Slackman: Now what? Im about to have a mental block!
+System: * This a moving platform. You can activate it by turning on your productive mode! *
+System: * Use [shift] to enable/disable productive mode. *
+System: * Not only will it activate platforms, but will also make you more agile! *
+System: * Just keep an eye on your motivation meter, as it drains faster on productive mode. *
+do GlobalState.freeze_game_time(false)
+=> END

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://ccf1y8egaxsec"
+path="res://.godot/imported/present-productive-mode.dialogue-fe5354df5d326c653965adaf0784c8a9.tres"
+
+[deps]
+
+source_file="res://dialogues/present-productive-mode.dialogue"
+dest_files=["res://.godot/imported/present-productive-mode.dialogue-fe5354df5d326c653965adaf0784c8a9.tres"]
+
+[params]
+
+defaults=true

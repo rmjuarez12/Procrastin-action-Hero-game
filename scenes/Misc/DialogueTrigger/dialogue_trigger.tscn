@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://hmlfonlapj4d"]
+
+[ext_resource type="Script" uid="uid://kypxbgy626yw" path="res://scenes/Misc/DialogueTrigger/dialogue_trigger.gd" id="1_2xktj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_svnwa"]
+
+[node name="DialogueTrigger" type="Area2D"]
+script = ExtResource("1_2xktj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_svnwa")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

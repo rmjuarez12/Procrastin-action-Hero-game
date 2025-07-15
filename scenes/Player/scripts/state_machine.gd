@@ -9,6 +9,10 @@ class_name PlayerStateMachine
 var states : Array[PlayerState]
 
 func _ready() -> void:
+
+	var global_state: Node = get_node(GlobalState.get_path())
+	global_state.freeze_time_changed.connect(_on_freeze_time_changed)
+
 	for child in get_children():
 		if child is PlayerState:
 			states.append(child)
@@ -27,6 +31,9 @@ func _physics_process(delta: float) -> void:
 		
 	current_state.state_process(delta)
 
+	if GlobalState.freeze_time:
+		current_state.can_move = false
+
 func switch_states(new_state : PlayerState):
 	if(current_state != null):
 		current_state.on_exit()
@@ -35,3 +42,7 @@ func switch_states(new_state : PlayerState):
 	current_state = new_state
 	
 	current_state.on_enter()
+
+func _on_freeze_time_changed(is_frozen: bool) -> void:
+	if not is_frozen:
+		current_state.can_move = true

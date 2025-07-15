@@ -19,8 +19,7 @@ func jump(_event : InputEvent):
 
 	if GlobalState.production_mode or GlobalState.momentum_high:
 		jump_velocity = high_jump_speed
-
-	if not GlobalState.momentum_high:
+	else:
 		can_move = false
 		playback.travel("charge_jump")
 		await get_tree().create_timer(0.6).timeout

@@ -18,8 +18,9 @@ extends CharacterBody2D
 
 @onready var momentum_bar: ProgressBar = $ProgressBar
 @onready var increase_momentum_timer: Timer = $ProgressBar/IncreaseMeter
-@onready var decrease_momentum_timer: Timer = $ProgressBar/DecreaseMeter
 @onready var decrease_momentum_buffer_timer: Timer = $ProgressBar/DecreaseMeterBuffer
+
+var is_momentum_increasing: bool = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -55,20 +56,21 @@ func _handle_char_movement():
 	# Get the input direction and handle the movement/deceleration.
 	if direction and state_machine.current_state.can_move:
 		velocity.x = move_toward(velocity.x, direction * speed, speed * acceleartion)
+
+		if not is_momentum_increasing:
+			increase_momentum_timer.start()
+			is_momentum_increasing = true
 	else:
 		velocity.x = move_toward(velocity.x, 0, walk_speed * deceleration)
+		toggle_run_anim = 0
+
+		if is_momentum_increasing:
+			decrease_momentum_buffer_timer.start()
+			increase_momentum_timer.stop()
+			is_momentum_increasing = false
 	
 	# Set animation to running when moving
 	animation_tree.set("parameters/Move/blend_position", toggle_run_anim * direction)
-
-	# Handle momentum bar
-	if Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right"):
-		increase_momentum_timer.start()
-		decrease_momentum_timer.stop()
-		decrease_momentum_buffer_timer.stop()
-	elif Input.is_action_just_released("left") or Input.is_action_just_released("right"):
-		decrease_momentum_buffer_timer.start()
-		increase_momentum_timer.stop()
 
 # Handle flipping sprite depending on direction
 func _handle_char_flip():
@@ -82,14 +84,8 @@ func _on_increase_meter_timeout() -> void:
 	if momentum_bar.value == 5:
 		GlobalState.momentum_high = true
 
-func _on_decrease_meter_timeout() -> void:
-	print("Decreasing momentum")
-	momentum_bar.value -= 2
-
-	if momentum_bar.value == 0:
-		decrease_momentum_timer.stop()
-
 func _on_decrease_meter_buffer_timeout() -> void:
 	print("Preparing to decrease momentum")
 	decrease_momentum_buffer_timer.stop()
-	decrease_momentum_timer.start()
+	momentum_bar.value = 0
+	GlobalState.momentum_high = false
