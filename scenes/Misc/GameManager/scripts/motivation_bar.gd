@@ -13,14 +13,19 @@ func _ready() -> void:
 	var global_state: Node = get_node(GlobalState.get_path())
 	global_state.production_mode_changed.connect(_on_production_mode_changed)
 	global_state.freeze_time_changed.connect(_on_freeze_time_changed)
+	global_state.motivation_changed.connect(_on_motivation_changed)
 
 func update_value_label() -> void:
 	value_label.text = str(int(progress_bar.value)) + "/" + str(initial_value)
 	decrease_timer.start()
 
 func _on_decrease_timer_timeout() -> void:
-	progress_bar.value -= 1
+	progress_bar.value -= 1.0
 	GlobalState.motivation_meter = progress_bar.value
+	update_value_label()
+
+func _on_motivation_changed(new_value: float) -> void:
+	progress_bar.value = new_value
 	update_value_label()
 
 func _on_freeze_time_changed(is_frozen: bool) -> void:

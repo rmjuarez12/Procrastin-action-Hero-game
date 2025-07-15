@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://blwi6npin8mvv"]
+
+[ext_resource type="Script" uid="uid://njnl6v8lwrop" path="res://scenes/Misc/Deathzone/deathzone.gd" id="1_jr21j"]
+[ext_resource type="AudioStream" uid="uid://dl0lhycuxg1e4" path="res://assets/fall-down.wav" id="2_dlghe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_go822"]
+
+[node name="Deathzone" type="Area2D" node_paths=PackedStringArray("fall_sfx")]
+script = ExtResource("1_jr21j")
+fall_sfx = NodePath("SfxFall")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_go822")
+
+[node name="SfxFall" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_dlghe")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

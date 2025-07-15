@@ -20,6 +20,8 @@ extends CharacterBody2D
 @onready var increase_momentum_timer: Timer = $ProgressBar/IncreaseMeter
 @onready var decrease_momentum_buffer_timer: Timer = $ProgressBar/DecreaseMeterBuffer
 
+@onready var damage_taken: PackedScene = preload("res://scenes/Misc/DamageCounter/damage_counter.tscn")
+
 var is_momentum_increasing: bool = false
 
 func _physics_process(delta: float) -> void:
@@ -56,19 +58,9 @@ func _handle_char_movement():
 	# Get the input direction and handle the movement/deceleration.
 	if direction and state_machine.current_state.can_move:
 		velocity.x = move_toward(velocity.x, direction * speed, speed * acceleartion)
-
-		# if not is_momentum_increasing:
-		# 	increase_momentum_timer.start()
-		# 	decrease_momentum_buffer_timer.stop()
-		# 	is_momentum_increasing = true
 	else:
 		velocity.x = move_toward(velocity.x, 0, walk_speed * deceleration)
 		toggle_run_anim = 0
-
-		# if is_momentum_increasing:
-		# 	decrease_momentum_buffer_timer.start()
-		# 	increase_momentum_timer.stop()
-		# 	is_momentum_increasing = false
 	
 	# Set animation to running when moving
 	animation_tree.set("parameters/Move/blend_position", toggle_run_anim * direction)
@@ -89,3 +81,9 @@ func _on_decrease_meter_buffer_timeout() -> void:
 	decrease_momentum_buffer_timer.stop()
 	momentum_bar.value = 0
 	GlobalState.momentum_high = false
+
+func display_damage(damage_value: int) -> void:
+	var damage_counter: Node2D = damage_taken.instantiate()
+	damage_counter.position = Vector2(position.x, position.y - 50)
+	damage_counter.update_value(damage_value)
+	get_tree().get_root().get_node("Stage").add_child(damage_counter)
