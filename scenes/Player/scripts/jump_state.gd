@@ -11,6 +11,7 @@ func _process(_delta: float) -> void:
 	if character.velocity.y > 100:
 		playback.travel("falling")
 		next_state = falling_state
+		next_state.can_move = true
 
 func on_exit():
 	print("Exiting Jump State")

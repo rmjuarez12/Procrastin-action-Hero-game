@@ -1,8 +1,8 @@
 ~ start
 do GlobalState.freeze_game_time(true)
-Max Slackman: Ugh, jumping is such a hasle
-System: * The more you move, the more momemntum meter you build. You can see the meter above your head. *
-System: * Once you reach at least 50%, you become more agile. *
-System: * However, the longer you stay still, you will lose it. *
+Max Slackman: Ugh, jumping is such a hasle...
+System: * The more you move, the more momentum meter you build. You can see the meter above your head. *
+System: * Once you reach at least 50%, you become more agile and jump higher! *
+System: * However, the longer you stay still, you will lose it. KEEP ON MOVING! *
 do GlobalState.freeze_game_time(false)
 => END

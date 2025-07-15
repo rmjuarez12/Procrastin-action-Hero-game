@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://dja06vrbi0ng"]
+
+[ext_resource type="PackedScene" uid="uid://cx2w4a805kn8v" path="res://scenes/Player/player_character.tscn" id="1_i3chx"]
+[ext_resource type="PackedScene" uid="uid://ul48bo6a210d" path="res://scenes/Misc/MainCamera/main_camera.tscn" id="2_8a1nb"]
+[ext_resource type="PackedScene" uid="uid://ts57erduk6u1" path="res://scenes/Misc/GameManager/game_manager.tscn" id="3_ds62d"]
+[ext_resource type="Resource" uid="uid://cvp0rm5fodc72" path="res://dialogues/stage-one-intro.dialogue" id="4_d2hdc"]
+
+[node name="Stage" type="Node2D"]
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_i3chx")]
+position = Vector2(24, 223)
+
+[node name="MainCamera" parent="." instance=ExtResource("2_8a1nb")]
+
+[node name="GameManager" parent="." instance=ExtResource("3_ds62d")]
+intro_dialogue = ExtResource("4_d2hdc")

@@ -2,6 +2,7 @@
 do GlobalState.freeze_game_time(true)
 Max Slackman: Ugh, what a drag... I need to get ready for work...
 Max Slackman: I better get this overwith, otherwise... *YAWN*...
+System: * Oh no, you are falling asleep again, don't lose your motivation! *
 System: * You can see your motivation level on the top left of the screen. *
 System: * Once it runs out, you will lose and you'll head straight back to bed. *
 System: * You gotta finish all 4 tasks or you'll start all over from the beginning! *

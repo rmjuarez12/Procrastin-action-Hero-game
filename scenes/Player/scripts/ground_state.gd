@@ -28,5 +28,6 @@ func jump(_event : InputEvent):
 
 	character.velocity.y = jump_velocity
 	next_state = jump_state
+	next_state.can_move = true
 	playback.travel("jump")
 	sfx_jump.play()

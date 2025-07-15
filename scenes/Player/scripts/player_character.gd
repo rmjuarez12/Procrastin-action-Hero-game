@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # Walking vars
 @export var walk_speed = 100.0
-@export var run_speed = 200.0
+@export var run_speed = 150.0
 @export_range(0,1) var deceleration = 0.1
 @export_range(0,1) var acceleartion = 0.08
 
@@ -57,17 +57,18 @@ func _handle_char_movement():
 	if direction and state_machine.current_state.can_move:
 		velocity.x = move_toward(velocity.x, direction * speed, speed * acceleartion)
 
-		if not is_momentum_increasing:
-			increase_momentum_timer.start()
-			is_momentum_increasing = true
+		# if not is_momentum_increasing:
+		# 	increase_momentum_timer.start()
+		# 	decrease_momentum_buffer_timer.stop()
+		# 	is_momentum_increasing = true
 	else:
 		velocity.x = move_toward(velocity.x, 0, walk_speed * deceleration)
 		toggle_run_anim = 0
 
-		if is_momentum_increasing:
-			decrease_momentum_buffer_timer.start()
-			increase_momentum_timer.stop()
-			is_momentum_increasing = false
+		# if is_momentum_increasing:
+		# 	decrease_momentum_buffer_timer.start()
+		# 	increase_momentum_timer.stop()
+		# 	is_momentum_increasing = false
 	
 	# Set animation to running when moving
 	animation_tree.set("parameters/Move/blend_position", toggle_run_anim * direction)
@@ -85,7 +86,6 @@ func _on_increase_meter_timeout() -> void:
 		GlobalState.momentum_high = true
 
 func _on_decrease_meter_buffer_timeout() -> void:
-	print("Preparing to decrease momentum")
 	decrease_momentum_buffer_timer.stop()
 	momentum_bar.value = 0
 	GlobalState.momentum_high = false
