@@ -467,11 +467,12 @@ player_character = NodePath("..")
 current_state = NodePath("Ground")
 animation_tree = NodePath("../AnimationTree")
 
-[node name="Ground" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump_state", "falling_state", "sfx_jump")]
+[node name="Ground" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump_state", "falling_state", "sfx_jump", "coyote_timer")]
 script = ExtResource("3_4ep61")
 jump_state = NodePath("../Jump")
 falling_state = NodePath("../Falling")
 sfx_jump = NodePath("../../SfxJump")
+coyote_timer = NodePath("../../CoyoteTimer")
 metadata/_custom_type_script = "uid://wxetrne6rgbt"
 
 [node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("falling_state")]
@@ -490,7 +491,6 @@ ground_state = NodePath("../Ground")
 metadata/_custom_type_script = "uid://wxetrne6rgbt"
 
 [node name="CurrState" type="Label" parent="." node_paths=PackedStringArray("player_character")]
-visible = false
 offset_left = -29.0
 offset_top = -33.0
 offset_right = 11.0
@@ -533,5 +533,9 @@ show_percentage = false
 [node name="DecreaseMeterBuffer" type="Timer" parent="ProgressBar"]
 wait_time = 1.5
 
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.2
+
 [connection signal="timeout" from="ProgressBar/IncreaseMeter" to="." method="_on_increase_meter_timeout"]
 [connection signal="timeout" from="ProgressBar/DecreaseMeterBuffer" to="." method="_on_decrease_meter_buffer_timeout"]
+[connection signal="timeout" from="CoyoteTimer" to="StateMachine/Ground" method="_on_coyote_timer_timeout"]

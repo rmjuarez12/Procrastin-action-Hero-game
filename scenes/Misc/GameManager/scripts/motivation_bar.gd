@@ -4,10 +4,8 @@ extends Panel
 @onready var decrease_timer: Timer = $DecreaseTimer
 @onready var value_label: Label = $ValueLabel
 
-var initial_value: int = 100
-
 func _ready() -> void:
-	progress_bar.value = initial_value
+	progress_bar.value = GlobalState.motivation_meter
 	decrease_timer.start()
 
 	var global_state: Node = get_node(GlobalState.get_path())
@@ -16,13 +14,17 @@ func _ready() -> void:
 	global_state.motivation_changed.connect(_on_motivation_changed)
 
 func update_value_label() -> void:
-	value_label.text = str(int(progress_bar.value)) + "/" + str(initial_value)
+	value_label.text = str(int(GlobalState.motivation_meter)) + "/" + str(int(GlobalState.initial_motivation))
 	decrease_timer.start()
 
 func _on_decrease_timer_timeout() -> void:
-	progress_bar.value -= 1.0
-	GlobalState.motivation_meter = progress_bar.value
+	GlobalState.motivation_meter -= 1.0
+	progress_bar.value = GlobalState.motivation_meter
 	update_value_label()
+
+	if GlobalState.motivation_meter <= 0:
+		GlobalState.handle_death()
+		decrease_timer.stop()
 
 func _on_motivation_changed(new_value: float) -> void:
 	progress_bar.value = new_value

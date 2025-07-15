@@ -26,7 +26,7 @@ func _on_body_entered(body:Node2D) -> void:
 	if body.name == "PlayerCharacter" and not is_collected:
 		collect_sfx.play()
 		animation_player.play("collect")
-		game_manager.add_motivation(increase_value)
+		GlobalState.motivation_meter += increase_value
 		is_collected = true
 
 func _on_sfx_collect_finished() -> void:

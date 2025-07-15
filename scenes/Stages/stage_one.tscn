@@ -2666,6 +2666,60 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAJABkAAAABAAAAAAAKABkAAAACAAAAAAAKABk
 tile_set = SubResource("TileSet_g2cu3")
 script = ExtResource("3_k5478")
 
+[node name="GUI" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="GUI"]
+position = Vector2(23, 193)
+texture = ExtResource("11_0l71r")
+
+[node name="Sprite2D2" type="Sprite2D" parent="GUI"]
+position = Vector2(77, 193)
+texture = ExtResource("12_vwta8")
+
+[node name="Sprite2D3" type="Sprite2D" parent="GUI"]
+position = Vector2(176, 277)
+texture = ExtResource("13_vwta8")
+
+[node name="Sprite2D4" type="Sprite2D" parent="GUI"]
+position = Vector2(300, 256)
+texture = ExtResource("14_y0x88")
+
+[node name="Label4" type="Label" parent="GUI"]
+offset_left = 253.0
+offset_top = 224.0
+offset_right = 352.0
+offset_bottom = 247.0
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("13_y0x88")
+theme_override_font_sizes/font_size = 12
+text = "Better Movement & Jump
+Drains Motivation Faster"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="GUI"]
+offset_left = 35.0
+offset_top = 185.0
+offset_right = 75.0
+offset_bottom = 208.0
+theme_override_fonts/font = ExtResource("13_y0x88")
+text = "Move"
+
+[node name="Label3" type="Label" parent="GUI"]
+offset_left = 270.0
+offset_top = 210.0
+offset_right = 330.0
+offset_bottom = 233.0
+theme_override_fonts/font = ExtResource("13_y0x88")
+text = "Focus Mode"
+
+[node name="Label2" type="Label" parent="GUI"]
+offset_left = 161.0
+offset_top = 250.0
+offset_right = 201.0
+offset_bottom = 273.0
+theme_override_fonts/font = ExtResource("13_y0x88")
+text = "Jump"
+
 [node name="GameManager" parent="." instance=ExtResource("6_y0x88")]
 intro_dialogue = ExtResource("7_cwe37")
 
@@ -2682,60 +2736,6 @@ position = Vector2(545, 288)
 
 [node name="Destination" parent="GameManager/MovingPlatforms/MovingPlatform" index="2"]
 position = Vector2(0, -204.286)
-
-[node name="GUI" type="Node" parent="GameManager"]
-
-[node name="Sprite2D" type="Sprite2D" parent="GameManager/GUI"]
-position = Vector2(23, 193)
-texture = ExtResource("11_0l71r")
-
-[node name="Sprite2D2" type="Sprite2D" parent="GameManager/GUI"]
-position = Vector2(77, 193)
-texture = ExtResource("12_vwta8")
-
-[node name="Sprite2D3" type="Sprite2D" parent="GameManager/GUI"]
-position = Vector2(176, 277)
-texture = ExtResource("13_vwta8")
-
-[node name="Sprite2D4" type="Sprite2D" parent="GameManager/GUI"]
-position = Vector2(300, 256)
-texture = ExtResource("14_y0x88")
-
-[node name="Label4" type="Label" parent="GameManager/GUI"]
-offset_left = 253.0
-offset_top = 224.0
-offset_right = 352.0
-offset_bottom = 247.0
-theme_override_constants/line_spacing = 0
-theme_override_fonts/font = ExtResource("13_y0x88")
-theme_override_font_sizes/font_size = 12
-text = "Better Movement & Jump
-Drains Motivation Faster"
-horizontal_alignment = 1
-
-[node name="Label" type="Label" parent="GameManager/GUI"]
-offset_left = 35.0
-offset_top = 185.0
-offset_right = 75.0
-offset_bottom = 208.0
-theme_override_fonts/font = ExtResource("13_y0x88")
-text = "Move"
-
-[node name="Label3" type="Label" parent="GameManager/GUI"]
-offset_left = 270.0
-offset_top = 210.0
-offset_right = 330.0
-offset_bottom = 233.0
-theme_override_fonts/font = ExtResource("13_y0x88")
-text = "Focus Mode"
-
-[node name="Label2" type="Label" parent="GameManager/GUI"]
-offset_left = 161.0
-offset_top = 250.0
-offset_right = 201.0
-offset_bottom = 273.0
-theme_override_fonts/font = ExtResource("13_y0x88")
-text = "Jump"
 
 [node name="Deathzone" parent="GameManager" node_paths=PackedStringArray("checkpoint") instance=ExtResource("13_cwe37")]
 position = Vector2(463, 384)
@@ -2754,6 +2754,7 @@ tile_set = SubResource("TileSet_8ob5a")
 script = ExtResource("3_k5478")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("4_0l71r")]
+z_index = 5
 position = Vector2(24, 223)
 
 [node name="MainCamera" parent="." instance=ExtResource("5_a7gv3")]

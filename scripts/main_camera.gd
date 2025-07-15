@@ -13,5 +13,5 @@ func _process(delta: float) -> void:
 	if target:
 		position = lerp(position, target.position, smoothing * delta)
 
-func _on_production_mode_changed(is_active: bool) -> void:
+func _on_production_mode_changed(_is_active: bool) -> void:
 	animation_player.play("small_shake")
