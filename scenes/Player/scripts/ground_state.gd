@@ -12,15 +12,12 @@ var coyote_time_started: bool = false
 func state_process(_delta):
 	if not character.is_on_floor():
 		if not coyote_time_started and GlobalState.production_mode:
-			print("Coyote time started")
 			coyote_time_started = true
 			coyote_timer.start()
 		elif not coyote_time_started and not GlobalState.production_mode:
-			print("Coyote Timer not available")
 			next_state = falling_state
 	else:
 		if coyote_time_started:
-			print("Coyote time ended")
 			coyote_time_started = false
 			coyote_timer.stop()
 
@@ -35,6 +32,7 @@ func jump(_event : InputEvent):
 		jump_velocity = high_jump_speed
 	else:
 		can_move = false
+		character.velocity.x = 0
 		playback.travel("charge_jump")
 		await get_tree().create_timer(0.6).timeout
 
@@ -48,5 +46,4 @@ func jump(_event : InputEvent):
 
 
 func _on_coyote_timer_timeout() -> void:
-	print("Coyote timer timeout")
 	next_state = falling_state

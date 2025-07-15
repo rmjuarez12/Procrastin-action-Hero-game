@@ -849,10 +849,9 @@ size = Vector2(93, 14)
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_7itrl")
 
-[node name="Platform" type="StaticBody2D" parent="."]
+[node name="Platform" type="AnimatableBody2D" parent="."]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Platform"]
-scale = Vector2(1, 1)
 tile_map_data = PackedByteArray("AAD9/wAAAAADABEAAAACAAAAAAAFABEAAAD+/wAAAAAEABEAAAD//wAAAAAEABEAAAAAAAAAAAAEABEAAAABAAAAAAAEABEAAAA=")
 tile_set = SubResource("TileSet_7itrl")
 script = ExtResource("2_x25r4")

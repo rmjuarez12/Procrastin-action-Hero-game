@@ -5,7 +5,7 @@ extends Node2D
 @onready var destination: Marker2D = $Destination
 
 func _process(delta: float) -> void:
-	var speed = 50 * delta
+	var speed = 150 * delta
 
 	var point_a = original_position
 	var point_b = destination
