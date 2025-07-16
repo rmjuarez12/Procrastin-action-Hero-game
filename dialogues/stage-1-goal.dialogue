@@ -1,0 +1,4 @@
+~ start
+do GlobalState.freeze_game_time(true)
+System: * First task completed, let's keep going! *
+=> END

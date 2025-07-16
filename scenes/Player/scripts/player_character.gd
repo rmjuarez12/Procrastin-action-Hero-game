@@ -11,18 +11,17 @@ extends CharacterBody2D
 @export var high_jump_speed = -350.0
 
 @export var change_mode_sfx: AudioStreamPlayer
+@export var invincibility_timer: Timer
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_tree : AnimationTree = $AnimationTree
+@onready var effects_animation: AnimationPlayer = $Effects
 @onready var state_machine: PlayerStateMachine = $StateMachine
-
-@onready var momentum_bar: ProgressBar = $ProgressBar
-@onready var increase_momentum_timer: Timer = $ProgressBar/IncreaseMeter
-@onready var decrease_momentum_buffer_timer: Timer = $ProgressBar/DecreaseMeterBuffer
 
 @onready var damage_taken: PackedScene = preload("res://scenes/Misc/DamageCounter/damage_counter.tscn")
 
-var is_momentum_increasing: bool = false
+var facing_right: bool = true
+var is_hit: bool = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -42,7 +41,6 @@ func _toggle_production_mode():
 		GlobalState.toggle_production_mode()
 
 		if not GlobalState.production_mode:
-			momentum_bar.value = 0
 			GlobalState.momentum_high = false
 
 # Handle main character movement on ground
@@ -69,21 +67,19 @@ func _handle_char_movement():
 func _handle_char_flip():
 	if velocity.x < 0:
 		sprite_2d.flip_h = true
+		facing_right = false
 	elif velocity.x > 0:
 		sprite_2d.flip_h = false
-
-func _on_increase_meter_timeout() -> void:
-	momentum_bar.value += 1
-	if momentum_bar.value == 5:
-		GlobalState.momentum_high = true
-
-func _on_decrease_meter_buffer_timeout() -> void:
-	decrease_momentum_buffer_timer.stop()
-	momentum_bar.value = 0
-	GlobalState.momentum_high = false
+		facing_right = true
 
 func display_damage(damage_value: int) -> void:
 	var damage_counter: Node2D = damage_taken.instantiate()
 	damage_counter.position = Vector2(position.x, position.y - 50)
 	damage_counter.update_value(damage_value)
 	get_tree().get_root().get_node("Stage").add_child(damage_counter)
+
+
+func _on_invincibility_timeout() -> void:
+	invincibility_timer.stop()
+	effects_animation.stop()
+	is_hit = false

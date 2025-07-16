@@ -1,0 +1,110 @@
+[gd_scene load_steps=15 format=3 uid="uid://bh62uh6wkgkss"]
+
+[ext_resource type="Script" uid="uid://dmv5cm1vqii04" path="res://scenes/PhoneEnemy/phone_enemy.gd" id="1_8k1tm"]
+[ext_resource type="Texture2D" uid="uid://cg4vnohgicya8" path="res://scenes/PhoneEnemy/detected.png" id="2_r1nnh"]
+[ext_resource type="Texture2D" uid="uid://c2v45xydkp1qu" path="res://scenes/PhoneEnemy/phone-enemy-idle.png" id="2_wp1ru"]
+[ext_resource type="Texture2D" uid="uid://dbbj7i6or4ex" path="res://scenes/PhoneEnemy/phone-enemy-jump.png" id="3_eyv4w"]
+[ext_resource type="AudioStream" uid="uid://dootb8fb30vty" path="res://scenes/PhoneEnemy/detect.wav" id="3_ty2tk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_000jh"]
+atlas = ExtResource("3_eyv4w")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ty2tk"]
+atlas = ExtResource("2_wp1ru")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1nnh"]
+atlas = ExtResource("2_wp1ru")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyv4w"]
+atlas = ExtResource("2_wp1ru")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cp0m2"]
+atlas = ExtResource("2_wp1ru")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rof1"]
+atlas = ExtResource("2_wp1ru")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wp1ru"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_000jh")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ty2tk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1nnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyv4w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cp0m2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rof1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8k1tm"]
+size = Vector2(22, 24)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ty2tk"]
+
+[node name="PhoneEnemy" type="RigidBody2D" node_paths=PackedStringArray("raycast_right", "raycast_left", "sprite", "detect_sprite", "collision_shape", "hitbox", "sfx_detected")]
+gravity_scale = 0.1
+script = ExtResource("1_8k1tm")
+raycast_right = NodePath("RaycastRight")
+raycast_left = NodePath("RaycastLeft")
+sprite = NodePath("AnimatedSprite2D")
+detect_sprite = NodePath("Sprite2D")
+collision_shape = NodePath("CollisionShape2D")
+hitbox = NodePath("Hitbox")
+sfx_detected = NodePath("SfxDetect")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -25)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_r1nnh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wp1ru")
+animation = &"attack"
+autoplay = "idle"
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_8k1tm")
+debug_color = Color(0.670586, 0.0398296, 0.543738, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_ty2tk")
+
+[node name="RaycastRight" type="RayCast2D" parent="."]
+target_position = Vector2(66, 0)
+
+[node name="RaycastLeft" type="RayCast2D" parent="."]
+target_position = Vector2(-65, 0)
+
+[node name="SfxDetect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ty2tk")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

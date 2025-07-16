@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cx2w4a805kn8v"]
+[gd_scene load_steps=50 format=3 uid="uid://cx2w4a805kn8v"]
 
 [ext_resource type="Script" uid="uid://biort7cvh06k5" path="res://scenes/Player/scripts/player_character.gd" id="1_soqk2"]
 [ext_resource type="Script" uid="uid://1qi6hcy4d2ms" path="res://scenes/Player/scripts/ground_state.gd" id="3_4ep61"]
@@ -452,11 +452,51 @@ corner_radius_bottom_right = 50
 corner_radius_bottom_left = 50
 anti_aliasing = false
 
-[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("change_mode_sfx")]
+[sub_resource type="Animation" id="Animation_jsfyi"]
+resource_name = "blinking_animation"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hhqei"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kxl64"]
+_data = {
+&"RESET": SubResource("Animation_hhqei"),
+&"blinking_animation": SubResource("Animation_jsfyi")
+}
+
+[node name="PlayerCharacter" type="CharacterBody2D" node_paths=PackedStringArray("change_mode_sfx", "invincibility_timer")]
 script = ExtResource("1_soqk2")
 change_mode_sfx = NodePath("SfxChangeMode")
+invincibility_timer = NodePath("Invincibility")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_uxe4s")
@@ -491,6 +531,7 @@ ground_state = NodePath("../Ground")
 metadata/_custom_type_script = "uid://wxetrne6rgbt"
 
 [node name="CurrState" type="Label" parent="." node_paths=PackedStringArray("player_character")]
+visible = false
 offset_left = -29.0
 offset_top = -33.0
 offset_right = 11.0
@@ -519,6 +560,7 @@ stream = ExtResource("8_xienw")
 bus = &"SFX"
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
 offset_left = -12.0
 offset_top = -19.0
 offset_right = 12.0
@@ -536,6 +578,15 @@ wait_time = 1.5
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.2
 
+[node name="Invincibility" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Effects" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_kxl64")
+}
+
 [connection signal="timeout" from="ProgressBar/IncreaseMeter" to="." method="_on_increase_meter_timeout"]
 [connection signal="timeout" from="ProgressBar/DecreaseMeterBuffer" to="." method="_on_decrease_meter_buffer_timeout"]
 [connection signal="timeout" from="CoyoteTimer" to="StateMachine/Ground" method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="Invincibility" to="." method="_on_invincibility_timeout"]

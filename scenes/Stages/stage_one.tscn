@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://caqlyy56jxb42"]
+[gd_scene load_steps=23 format=4 uid="uid://caqlyy56jxb42"]
 
 [ext_resource type="Texture2D" uid="uid://borklef10h2hq" path="res://assets/Line-And-Shape-16x16-Expanded-Gothic.png" id="1_a7gv3"]
 [ext_resource type="Texture2D" uid="uid://bj22nuxkaqogp" path="res://assets/Line-And-Shape-16x16-Expanded.png" id="2_q142c"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cx2w4a805kn8v" path="res://scenes/Player/player_character.tscn" id="4_0l71r"]
 [ext_resource type="PackedScene" uid="uid://ul48bo6a210d" path="res://scenes/Misc/MainCamera/main_camera.tscn" id="5_a7gv3"]
 [ext_resource type="PackedScene" uid="uid://ts57erduk6u1" path="res://scenes/Misc/GameManager/game_manager.tscn" id="6_y0x88"]
+[ext_resource type="Texture2D" uid="uid://ddatxjpij172e" path="res://assets/pxkw_arrow_up.png" id="7_1ljlw"]
 [ext_resource type="Resource" uid="uid://cvp0rm5fodc72" path="res://dialogues/stage-one-intro.dialogue" id="7_cwe37"]
 [ext_resource type="PackedScene" uid="uid://c8bxs8fhbrwli" path="res://scenes/Items/MotivationBooster/motivation_booster.tscn" id="8_1ljlw"]
 [ext_resource type="PackedScene" uid="uid://chf36xnb627qy" path="res://scenes/Misc/MovingPlatform/moving_platform.tscn" id="9_6swds"]
@@ -2677,8 +2678,12 @@ position = Vector2(77, 193)
 texture = ExtResource("12_vwta8")
 
 [node name="Sprite2D3" type="Sprite2D" parent="GUI"]
-position = Vector2(176, 277)
+position = Vector2(142, 277)
 texture = ExtResource("13_vwta8")
+
+[node name="Sprite2D5" type="Sprite2D" parent="GUI"]
+position = Vector2(207, 277)
+texture = ExtResource("7_1ljlw")
 
 [node name="Sprite2D4" type="Sprite2D" parent="GUI"]
 position = Vector2(300, 256)
@@ -2719,6 +2724,15 @@ offset_right = 201.0
 offset_bottom = 273.0
 theme_override_fonts/font = ExtResource("13_y0x88")
 text = "Jump"
+
+[node name="Label5" type="Label" parent="GUI"]
+offset_left = 182.0
+offset_top = 270.0
+offset_right = 222.0
+offset_bottom = 299.0
+theme_override_fonts/font = ExtResource("13_y0x88")
+text = "Or
+"
 
 [node name="GameManager" parent="." instance=ExtResource("6_y0x88")]
 intro_dialogue = ExtResource("7_cwe37")

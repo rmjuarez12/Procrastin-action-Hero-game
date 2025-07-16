@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bbrbwcbsfghh5"
+path="res://.godot/imported/stage-1-goal.dialogue-07d0a5b209d7035ee1c5a60334b5ebaa.tres"
+
+[deps]
+
+source_file="res://dialogues/stage-1-goal.dialogue"
+dest_files=["res://.godot/imported/stage-1-goal.dialogue-07d0a5b209d7035ee1c5a60334b5ebaa.tres"]
+
+[params]
+
+defaults=true

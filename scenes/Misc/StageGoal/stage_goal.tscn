@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://cawl7x884jm0m"]
+
+[ext_resource type="Script" uid="uid://b57oaxo0egb0u" path="res://scenes/Misc/StageGoal/stage_goal.gd" id="1_4d7px"]
+[ext_resource type="Texture2D" uid="uid://8y1v0bidm6fg" path="res://scenes/Misc/FinishLine/star-goal.png" id="1_ikysr"]
+[ext_resource type="Resource" uid="uid://bbrbwcbsfghh5" path="res://dialogues/stage-1-goal.dialogue" id="2_45joe"]
+[ext_resource type="PackedScene" uid="uid://dcn1didwt1pd5" path="res://scenes/Misc/SceneTransition/scene_transition.tscn" id="3_qhq7o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4fxd"]
+
+[sub_resource type="Animation" id="Animation_4d7px"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ikysr"]
+resource_name = "bounce"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0, 0), Vector2(0, 1), Vector2(0, 2), Vector2(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_45joe"]
+_data = {
+&"RESET": SubResource("Animation_4d7px"),
+&"bounce": SubResource("Animation_ikysr")
+}
+
+[node name="StageGoal" type="Area2D"]
+script = ExtResource("1_4d7px")
+dialogue = ExtResource("2_45joe")
+transition_fade = ExtResource("3_qhq7o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_ikysr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_y4fxd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_45joe")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
