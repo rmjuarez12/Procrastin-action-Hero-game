@@ -531,7 +531,6 @@ ground_state = NodePath("../Ground")
 metadata/_custom_type_script = "uid://wxetrne6rgbt"
 
 [node name="CurrState" type="Label" parent="." node_paths=PackedStringArray("player_character")]
-visible = false
 offset_left = -29.0
 offset_top = -33.0
 offset_right = 11.0

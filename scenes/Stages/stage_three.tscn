@@ -2811,7 +2811,7 @@ script = ExtResource("3_3stof")
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("10_y50nj")]
 z_index = 1
-position = Vector2(467, 204)
+position = Vector2(25, 79)
 
 [node name="MainCamera" parent="." instance=ExtResource("11_i8b4l")]
 zoom = Vector2(0.7, 0.7)
