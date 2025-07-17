@@ -195,7 +195,7 @@ autoplay = "bounce"
 
 [node name="SfxCollect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_3xoow")
-bus = &"SFX"
+bus = &"sfx"
 
 [node name="PopupText" type="Label" parent="."]
 visible = false

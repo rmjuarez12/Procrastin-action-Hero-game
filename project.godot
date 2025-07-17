@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Procrastin-action Hero"
-run/main_scene="uid://caqlyy56jxb42"
+run/main_scene="uid://0mwfhobwiyus"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="uid://bxgwe2b7ss3bg"
 
 [autoload]
 
@@ -66,7 +70,7 @@ change_mode={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialogues/stage-one-intro.dialogue", "res://dialogues/present-momentum-meter.dialogue", "res://dialogues/present-productive-mode.dialogue", "res://dialogues/stage-1-goal.dialogue", "res://dialogues/stage-2-goal.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogues/stage-one-intro.dialogue", "res://dialogues/present-momentum-meter.dialogue", "res://dialogues/present-productive-mode.dialogue", "res://dialogues/stage-1-goal.dialogue", "res://dialogues/stage-2-goal.dialogue", "res://dialogues/death.dialogue")
 
 [physics]
 

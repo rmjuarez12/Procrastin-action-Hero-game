@@ -1,0 +1,36 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bga8ui6sqlkcy"]
+
+[ext_resource type="FontFile" uid="uid://c6juvcku4b4xx" path="res://assets/m5x7.ttf" id="1_dqtmy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ecyt"]
+bg_color = Color(1, 0.709804, 0.113725, 1)
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 10.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oog62"]
+bg_color = Color(0.306923, 0.306923, 0.306923, 0.508)
+border_width_bottom = 2
+expand_margin_left = 10.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dqtmy"]
+bg_color = Color(1, 0.709804, 0.113725, 1)
+border_width_bottom = 2
+expand_margin_left = 10.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
+
+[resource]
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/fonts/font = ExtResource("1_dqtmy")
+Button/styles/hover = SubResource("StyleBoxFlat_8ecyt")
+Button/styles/normal = SubResource("StyleBoxFlat_oog62")
+Button/styles/pressed = SubResource("StyleBoxFlat_dqtmy")
+Label/fonts/font = ExtResource("1_dqtmy")

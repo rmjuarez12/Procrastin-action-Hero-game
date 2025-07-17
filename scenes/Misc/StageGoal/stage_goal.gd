@@ -8,17 +8,17 @@ func _ready() -> void:
 	DialogueManager.dialogue_ended.connect(_on_dialogue_manager_dialogue_ended)
 
 func _on_dialogue_manager_dialogue_ended(_dialogue: DialogueResource) -> void:
-	print("Dialogue ended, transitioning to new scene...")
-	var transition_instance = transition_fade.instantiate()
-	get_tree().get_root().add_child(transition_instance)
-	transition_instance.animation_player.play("fade_in")
+	if _dialogue == dialogue:
+		var transition_instance = transition_fade.instantiate()
+		get_tree().get_root().add_child(transition_instance)
+		transition_instance.animation_player.play("fade_in")
 
-	await transition_instance.animation_player.animation_finished
+		await transition_instance.animation_player.animation_finished
 
-	GlobalState.freeze_game_time(false)
+		GlobalState.freeze_game_time(false)
 
-	transition_instance.animation_player.play("fade_out")
-	get_tree().change_scene_to_file(new_scene)
+		transition_instance.animation_player.play("fade_out")
+		get_tree().change_scene_to_file(new_scene)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "PlayerCharacter":

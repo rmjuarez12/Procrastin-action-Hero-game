@@ -16,5 +16,4 @@ func state_input(event : InputEvent):
 		_cancel_jump()
 
 func _cancel_jump():
-	print("Jump cancelled")
 	character.velocity.y *= decelerate_on_jump_release

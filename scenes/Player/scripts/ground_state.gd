@@ -4,12 +4,16 @@ extends PlayerState
 @export var high_jump_speed = -400.0
 @export var jump_state: PlayerState
 @export var falling_state: PlayerState
+@export var death_state : PlayerState
 @export var sfx_jump: AudioStreamPlayer
 @export var coyote_timer: Timer
 
 var coyote_time_started: bool = false
 
 func state_process(_delta):
+	if GlobalState.motivation_meter <= 0:
+		next_state = death_state
+
 	if not character.is_on_floor():
 		if not coyote_time_started and GlobalState.production_mode:
 			coyote_time_started = true

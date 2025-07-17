@@ -2665,12 +2665,15 @@ script = ExtResource("6_d2hdc")
 [node name="GUI" type="Node" parent="."]
 
 [node name="Label" type="Label" parent="GUI"]
-offset_left = 299.0
-offset_top = 420.0
-offset_right = 339.0
-offset_bottom = 443.0
+offset_left = 286.0
+offset_top = 408.0
+offset_right = 347.0
+offset_bottom = 437.0
+theme_override_constants/line_spacing = 0
 theme_override_fonts/font = ExtResource("4_rpmqu")
-text = "Caution!"
+text = "Caution!
+Focus Block!"
+horizontal_alignment = 1
 
 [node name="GameManager" parent="." instance=ExtResource("3_ds62d")]
 

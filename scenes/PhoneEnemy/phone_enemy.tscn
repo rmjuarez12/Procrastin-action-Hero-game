@@ -68,6 +68,7 @@ size = Vector2(22, 24)
 
 [node name="PhoneEnemy" type="RigidBody2D" node_paths=PackedStringArray("raycast_right", "raycast_left", "sprite", "detect_sprite", "collision_shape", "hitbox", "sfx_detected")]
 gravity_scale = 0.1
+lock_rotation = true
 script = ExtResource("1_8k1tm")
 raycast_right = NodePath("RaycastRight")
 raycast_left = NodePath("RaycastLeft")
@@ -106,5 +107,6 @@ target_position = Vector2(-65, 0)
 
 [node name="SfxDetect" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ty2tk")
+bus = &"sfx"
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

@@ -16,9 +16,9 @@ func _ready() -> void:
 	sprite.animation = booster_type
 
 	if booster_type == "coffee":
-		increase_value = 20
+		increase_value = 25
 	elif booster_type == "energy_drink":
-		increase_value = 30
+		increase_value = 35
 
 	popup_text.text = "+ " + str(increase_value)
 
