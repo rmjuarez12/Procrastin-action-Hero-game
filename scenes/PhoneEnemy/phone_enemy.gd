@@ -83,8 +83,14 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		body.is_hit = true
 		body.change_mode_sfx.play()
 		body.velocity = Vector2(hit_recoil_x, hit_recoil_y)
-		body.display_damage(10)
 		body.invincibility_timer.start()
 		body.effects_animation.play("blinking_animation")
+
+		if GlobalState.game_difficulty == "Hard":
+			GlobalState.decrease_motivation(20)
+			body.display_damage(20)
+		else:
+			GlobalState.decrease_motivation(10)
+			body.display_damage(10)
 
 		self.queue_free()

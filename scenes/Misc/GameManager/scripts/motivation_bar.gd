@@ -40,13 +40,23 @@ func _on_production_mode_changed(is_active: bool) -> void:
 
 	var tint_progress_color: Color = Color(0.4803, 0.0026, 0.7936, 1.0)
 	var tint_under_color: Color = Color(0.7686, 0.4275, 1.0, 1.0)
+	var decrease_timer_countdown: float = 1.0
 
 	if is_active:
-		decrease_timer.wait_time = 0.2
 		tint_progress_color = Color(1.0, 1.0, 1.0, 1.0)
 		tint_under_color = Color(1.0, 1.0, 1.0, 1.0)
+
+		if GlobalState.game_difficulty == "Hard":
+			decrease_timer_countdown = 1
+		else: 
+			decrease_timer_countdown = 0.2
 	else:
-		decrease_timer.wait_time = 1.0
+		if GlobalState.game_difficulty == "Hard":
+			decrease_timer_countdown = 1.5
+		else: 
+			decrease_timer_countdown = 1.0
+
+	decrease_timer.wait_time = decrease_timer_countdown
 
 	progress_bar.tint_progress = tint_progress_color
 	progress_bar.tint_under = tint_under_color

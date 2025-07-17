@@ -2846,7 +2846,6 @@ normal_difficulty = NodePath("SubMenu/NormalDifficulty")
 hard_difficulty = NodePath("SubMenu/HardDifficulty")
 
 [node name="MainMenu" type="VBoxContainer" parent="UI/Panel"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2881,6 +2880,7 @@ text = "Quit
 "
 
 [node name="SubMenu" type="VBoxContainer" parent="UI/Panel"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2958,7 +2958,7 @@ layout_mode = 2
 text = "- Meter drains faster
 - More power ups
 - Excess meter adds up
-- Get more damage"
+- Take less damage"
 
 [node name="HardDifficulty" type="Label" parent="UI/Panel/SubMenu"]
 visible = false
@@ -2966,7 +2966,7 @@ layout_mode = 2
 text = "- Meter drains slower
 - Less  power ups
 - Excess meter gets wasted
-- Get less damage"
+- Take more damage"
 
 [node name="Save" type="Button" parent="UI/Panel/SubMenu"]
 layout_mode = 2

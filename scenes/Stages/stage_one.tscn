@@ -2742,6 +2742,7 @@ intro_dialogue = ExtResource("7_cwe37")
 [node name="MotivationBooster" parent="GameManager/Items" instance=ExtResource("8_1ljlw")]
 position = Vector2(544, 131)
 booster_type = "energy_drink"
+remove_on_hard = true
 
 [node name="MovingPlatforms" type="Node" parent="GameManager"]
 

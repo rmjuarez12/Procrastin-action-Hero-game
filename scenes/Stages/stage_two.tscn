@@ -2681,6 +2681,7 @@ horizontal_alignment = 1
 
 [node name="MotivationBooster" parent="GameManager/Items" instance=ExtResource("5_tiwug")]
 position = Vector2(695, 357)
+remove_on_hard = true
 
 [node name="MotivationBooster2" parent="GameManager/Items" instance=ExtResource("5_tiwug")]
 position = Vector2(663, 78)
