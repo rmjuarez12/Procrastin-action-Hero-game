@@ -64,6 +64,15 @@ func send_to_end() -> void:
   get_tree().change_scene_to_file(end_scene_path)
 
 func reset_to_default() -> void:
+  var transition_instance = transition_fade.instantiate()
+  get_tree().get_root().add_child(transition_instance)
+  transition_instance.animation_player.play("fade_in")
+
+  await transition_instance.animation_player.animation_finished
+
+  transition_instance.animation_player.play("fade_out")
+  get_tree().change_scene_to_file(stage_one_path)
+
   production_mode = default_state["production_mode"]
   momentum_high = default_state["momentum_high"]
   freeze_time = default_state["freeze_time"]
@@ -75,15 +84,6 @@ func reset_to_default() -> void:
     "time_mins": 0,
     "time_secs": 0
   }
-
-  var transition_instance = transition_fade.instantiate()
-  get_tree().get_root().add_child(transition_instance)
-  transition_instance.animation_player.play("fade_in")
-
-  await transition_instance.animation_player.animation_finished
-
-  transition_instance.animation_player.play("fade_out")
-  get_tree().change_scene_to_file(stage_one_path)
 
 func quit_game() -> void:
   get_tree().quit()

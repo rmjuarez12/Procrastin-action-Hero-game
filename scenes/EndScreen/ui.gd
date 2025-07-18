@@ -4,6 +4,8 @@ extends Node
 @export var completion_time_val: Label
 @export var win_label: Label
 
+var transition_fade: PackedScene = preload("res://scenes/Misc/SceneTransition/scene_transition.tscn")
+
 func _ready() -> void:
 	StageMusic.stop_music()
 
@@ -24,3 +26,13 @@ func _on_start_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+func _on_main_menu_btn_pressed() -> void:
+	var transition_instance = transition_fade.instantiate()
+	get_tree().get_root().add_child(transition_instance)
+	transition_instance.animation_player.play("fade_in")
+
+	await transition_instance.animation_player.animation_finished
+
+	transition_instance.animation_player.play("fade_out")
+	get_tree().change_scene_to_file("res://scenes/MainMenu/main_menu.tscn")

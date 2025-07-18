@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://ts57erduk6u1"]
+[gd_scene load_steps=10 format=3 uid="uid://ts57erduk6u1"]
 
 [ext_resource type="Script" uid="uid://c4cep3gjwysdq" path="res://scenes/Misc/GameManager/scripts/game_manager.gd" id="1_0uon3"]
 [ext_resource type="FontFile" uid="uid://c6juvcku4b4xx" path="res://assets/m5x7.ttf" id="2_2wmy1"]
 [ext_resource type="Texture2D" uid="uid://b1f600a8tqbfn" path="res://scenes/Misc/GameManager/assets/healthbarUnder.png" id="2_encro"]
 [ext_resource type="Script" uid="uid://dyvw1qlq3hsro" path="res://scenes/Misc/GameManager/scripts/motivation_bar.gd" id="3_encro"]
 [ext_resource type="Texture2D" uid="uid://dtnorpac6mpaf" path="res://scenes/Misc/GameManager/assets/healthbarProgress.png" id="3_wlm32"]
+[ext_resource type="Theme" uid="uid://bga8ui6sqlkcy" path="res://scenes/MainMenu/main_menu.tres" id="6_sfa7y"]
+[ext_resource type="Script" uid="uid://snjqwq0yeyww" path="res://scenes/Misc/GameManager/pause_menu.gd" id="6_xdurr"]
 
 [sub_resource type="Theme" id="Theme_wlm32"]
 default_font = ExtResource("2_2wmy1")
@@ -59,5 +61,55 @@ text = "100/100"
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+script = ExtResource("6_xdurr")
+
+[node name="Panel" type="Panel" parent="PauseMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_sfa7y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_sfa7y")
+theme_override_font_sizes/font_size = 25
+text = "Game Paused"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="Retry" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Retry"
+
+[node name="BackToTitle" type="Button" parent="PauseMenu/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Back To Main Menu"
+
 [connection signal="timeout" from="HUD/MotivationBar/DecreaseTimer" to="HUD/MotivationBar" method="_on_decrease_timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="PauseMenu/Panel/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/Panel/VBoxContainer/Retry" to="PauseMenu" method="_on_retry_pressed"]
+[connection signal="pressed" from="PauseMenu/Panel/VBoxContainer/BackToTitle" to="PauseMenu" method="_on_back_to_title_pressed"]

@@ -3,7 +3,7 @@ extends AudioStreamPlayer
 const level_music: AudioStream = preload("res://assets/summer nights.ogg")
 
 func _play_music(music: AudioStream, volume: float = 1.0) -> void:
-	if stream == music:
+	if stream == music and playing:
 		return
 
 	stream = music

@@ -10,6 +10,9 @@ var master_audio_bus = AudioServer.get_bus_index("Master")
 var music_audio_bus = AudioServer.get_bus_index("bgm")
 var sfx_audio_bus = AudioServer.get_bus_index("sfx")
 
+func _ready() -> void:
+	StageMusic.stop_music()
+
 func _on_start_pressed() -> void:
 	GlobalState.reset_to_default()
 

@@ -2902,7 +2902,7 @@ text = "00:00"
 layout_mode = 2
 text = "Try Again?"
 
-[node name="Options" type="Button" parent="UI/Panel/MainMenu"]
+[node name="MainMenuBtn" type="Button" parent="UI/Panel/MainMenu"]
 layout_mode = 2
 text = "Main Menu"
 
@@ -2917,4 +2917,5 @@ autoplay = true
 bus = &"bgm"
 
 [connection signal="pressed" from="UI/Panel/MainMenu/Start" to="UI" method="_on_start_pressed"]
+[connection signal="pressed" from="UI/Panel/MainMenu/MainMenuBtn" to="UI" method="_on_main_menu_btn_pressed"]
 [connection signal="pressed" from="UI/Panel/MainMenu/Quit" to="UI" method="_on_quit_pressed"]
