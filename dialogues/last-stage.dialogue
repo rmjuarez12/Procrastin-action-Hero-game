@@ -1,0 +1,5 @@
+~ start
+do GlobalState.freeze_game_time(true)
+System: * Congrats, you were able to get past your mental block! *
+System: * Now you can get started with your work!! *
+=> END

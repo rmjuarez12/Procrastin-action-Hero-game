@@ -11,6 +11,7 @@ var game_difficulty: String = "Normal"
 var transition_fade: PackedScene = preload("res://scenes/Misc/SceneTransition/scene_transition.tscn")
 
 var stage_one_path: String = "res://scenes/Stages/stage_one.tscn"
+var end_scene_path: String = "res://scenes/EndScreen/end_screen.tscn"
 
 var default_state: Dictionary = {
   "production_mode": false,
@@ -20,12 +21,19 @@ var default_state: Dictionary = {
   "initial_motivation": 100
 }
 
+var game_stats: Dictionary = {
+  "motivation_lost": 0,
+  "time_mins": 0,
+  "time_secs": 0
+}
+
 signal production_mode_changed(is_active: bool)
 signal freeze_time_changed(is_frozen: bool)
 signal motivation_changed(new_value: float)
 
 func decrease_motivation(value: float) -> void:
   motivation_meter -= value
+  game_stats["motivation_lost"] += value
 
   if motivation_meter < 0:
     motivation_meter = 1
@@ -45,12 +53,28 @@ func handle_death() -> void:
   freeze_game_time(true)
   toggle_production_mode(false)
 
+func send_to_end() -> void:
+  var transition_instance = transition_fade.instantiate()
+  get_tree().get_root().add_child(transition_instance)
+  transition_instance.animation_player.play("fade_in")
+
+  await transition_instance.animation_player.animation_finished
+
+  transition_instance.animation_player.play("fade_out")
+  get_tree().change_scene_to_file(end_scene_path)
+
 func reset_to_default() -> void:
   production_mode = default_state["production_mode"]
   momentum_high = default_state["momentum_high"]
   freeze_time = default_state["freeze_time"]
   motivation_meter = default_state["motivation_meter"]
   initial_motivation = default_state["initial_motivation"]
+
+  game_stats = {
+    "motivation_lost": 0,
+    "time_mins": 0,
+    "time_secs": 0
+  }
 
   var transition_instance = transition_fade.instantiate()
   get_tree().get_root().add_child(transition_instance)

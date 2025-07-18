@@ -47,13 +47,10 @@ func _on_production_mode_changed(is_active: bool) -> void:
 		tint_under_color = Color(1.0, 1.0, 1.0, 1.0)
 
 		if GlobalState.game_difficulty == "Hard":
-			decrease_timer_countdown = 1
+			decrease_timer_countdown = 0.7
 		else: 
 			decrease_timer_countdown = 0.2
 	else:
-		if GlobalState.game_difficulty == "Hard":
-			decrease_timer_countdown = 1.5
-		else: 
 			decrease_timer_countdown = 1.0
 
 	decrease_timer.wait_time = decrease_timer_countdown

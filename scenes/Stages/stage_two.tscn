@@ -2686,6 +2686,7 @@ remove_on_hard = true
 [node name="MotivationBooster2" parent="GameManager/Items" instance=ExtResource("5_tiwug")]
 position = Vector2(663, 78)
 booster_type = "energy_drink"
+remove_on_hard = true
 
 [node name="MovingPlatforms" type="Node" parent="GameManager"]
 

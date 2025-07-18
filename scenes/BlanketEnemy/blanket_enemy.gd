@@ -4,11 +4,12 @@ extends Area2D
 
 @export var sprite: AnimatedSprite2D
 
-var move_speed: float = 40.0
+var move_speed: float = 60.0
 
 func _ready() -> void:
 	var global_state: Node = get_node(GlobalState.get_path())
 	global_state.production_mode_changed.connect(_on_production_mode_changed)
+	global_state.freeze_time_changed.connect(_on_freeze_time_changed)
 
 func _process(delta: float) -> void:
 	position.x = move_toward(position.x, character.position.x, move_speed * delta)
@@ -19,6 +20,14 @@ func _process(delta: float) -> void:
 	else:
 		sprite.flip_h = false
 
+func _on_freeze_time_changed(is_frozen: bool) -> void:
+	if is_frozen:
+		move_speed = 0.0
+	else:
+		if GlobalState.game_difficulty == "Hard":
+			move_speed = 70.0
+		else:
+			move_speed = 40.0
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "PlayerCharacter":
@@ -42,7 +51,13 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_production_mode_changed(is_active: bool) -> void:
 	if is_active:
 		scale = Vector2(1, 1)
-		move_speed = 20.0
+		if GlobalState.game_difficulty == "Hard":
+			move_speed = 20.0
+		else:
+			move_speed = 50.0
 	else:
 		scale = Vector2(2.5, 2.5)
-		move_speed = 40.0
+		if GlobalState.game_difficulty == "Hard":
+			move_speed = 70.0
+		else:
+			move_speed = 40.0

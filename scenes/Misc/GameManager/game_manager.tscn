@@ -12,9 +12,9 @@ default_font = ExtResource("2_2wmy1")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wlm32"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[node name="GameManager" type="Node" node_paths=PackedStringArray("motivation_bar")]
+[node name="GameManager" type="Node" node_paths=PackedStringArray("timer")]
 script = ExtResource("1_0uon3")
-motivation_bar = NodePath("HUD/MotivationBar")
+timer = NodePath("Timer")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -56,4 +56,8 @@ text = "100/100"
 
 [node name="DecreaseTimer" type="Timer" parent="HUD/MotivationBar"]
 
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="timeout" from="HUD/MotivationBar/DecreaseTimer" to="HUD/MotivationBar" method="_on_decrease_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

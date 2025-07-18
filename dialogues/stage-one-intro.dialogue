@@ -1,10 +1,8 @@
 ~ start
 do GlobalState.freeze_game_time(true)
-Max Slackman: Ugh, what a drag... I need to get ready for work...
-Max Slackman: I better get this overwith, otherwise... *YAWN*...
-System: * Oh no, you are falling asleep again, don't lose your motivation! *
+System: * Your name is Max Slackman. You struggle with getting started with tasks *
+System: * This is a mental representation of the mental struggle. *
 System: * You can see your motivation level on the top left of the screen. *
-System: * Once it runs out, you will lose and you'll head straight back to bed. *
-System: * You gotta finish all 3 tasks or you'll start all over from the beginning! *
+System: * Overcome your mental struggles to JUST GET STARTED WITH WORK! *
 do GlobalState.freeze_game_time(false)
 => END

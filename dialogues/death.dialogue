@@ -1,8 +1,4 @@
 ~ start
-Max Slackman: [[Well, I tried, back to bed...|*YAWN* Oh well, will try again tomorrow|Meh, I can go to work tomorrow, Ill call off today]].
-System: * You lost all motivation *
-- Try Again?
-	do GlobalState.reset_to_default()
-- Quit
-	Nathan: You picked the second one.
+Max Slackman: [[Well, I tried, back to bed...|*YAWN* Oh well, will try again tomorrow|Meh, I can finish this tomorrow...]].
+do GlobalState.send_to_end()
 => END
