@@ -36,3 +36,4 @@ func _on_timer_timeout() -> void:
 	GlobalState.game_stats["time_mins"] = minutes
 
 	print(GlobalState.game_stats)
+	print(GlobalState.motivation_meter)

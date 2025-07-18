@@ -8,6 +8,8 @@ func _ready() -> void:
 	progress_bar.value = GlobalState.motivation_meter
 	decrease_timer.start()
 
+	update_value_label()
+
 	var global_state: Node = get_node(GlobalState.get_path())
 	global_state.production_mode_changed.connect(_on_production_mode_changed)
 	global_state.freeze_time_changed.connect(_on_freeze_time_changed)
